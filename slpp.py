@@ -121,7 +121,9 @@ class SLPP:
 				if self.ch == '\\' and start == end:
 					self.next_chr()
 					if self.ch != end:
-						s += '\\'
+						if self.ch!='\\':
+							s += ('\\'+self.ch).decode('string_escape')
+							continue
 				s += self.ch
 		print ERRORS['unexp_end_string']
 
