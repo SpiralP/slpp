@@ -1,5 +1,3 @@
-# TODO make proper exceptions instead of just printing!
-
 import re
 
 ERRORS = {
@@ -10,7 +8,10 @@ ERRORS = {
 	'mfnumber_sci': u'Malformed number (bad scientific format).',
 }
 
-
+class SLPPUnexpectedEndString(Exception):
+	pass
+class SLPPUnexpectedEndTable(Exception):
+	pass
 class ParseError(Exception):
 	pass
 
@@ -127,7 +128,7 @@ class SLPP:
 							s += ('\\'+self.ch).decode('string_escape')
 							continue
 				s += self.ch
-		print ERRORS['unexp_end_string']
+		raise SLPPUnexpectedEndString(ERRORS['unexp_end_string'])
 
 	def object(self):
 		o = {}
@@ -179,7 +180,7 @@ class SLPP:
 							o[idx] = k
 						idx += 1
 						k = None
-		print ERRORS['unexp_end_table'] #Bad exit here
+		raise SLPPUnexpectedEndTable(ERRORS['unexp_end_table']) #Bad exit here
 
 	def word(self):
 		s = ''
