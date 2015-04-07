@@ -1,3 +1,5 @@
+# TODO make proper exceptions instead of just printing!
+
 import re
 
 ERRORS = {
