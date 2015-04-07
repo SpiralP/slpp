@@ -51,7 +51,7 @@ class SLPP:
         newline = self.newline
         tp = type(obj)
         if tp is str:
-            s += '"%s"' % obj.replace(r'"', r'\"')
+            s += '"%s"' % obj.replace(r'"', r'\"').replace('\\','\\\\')
         elif tp in [int, float, long, complex]:
             s += str(obj)
         elif tp is bool:
